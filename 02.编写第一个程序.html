@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/three.js"></script>
+
+</head>
+
+<body>
+    <!-- 1.场景就是舞台，你可以把任何要显示的东西，放在场景中的任何位置。
+    THREE.Scene = function();
+
+    2.相机：相机就是现实生活中的相机，我们最终能够在浏览器中看到的景象，
+    就是相机拍摄出来的。
+    两大相机：
+    透视相机：透视投影符合人们心里习惯，即离视点近的物体大，离视点远的物体小，
+    远到极点即为消失，成为灭点。
+    正投影相机：就是远处的和近处的是一样大。
+    透视相机：THREE.PerspectiveCamera( fov, aspect, near, far )
+    参数说明：
+    视角fov：这个最难理解,我的理解是,眼睛睁开的角度,即,视角的大小,如果设置为0,相当你闭上眼睛了,所以什么也看不到,如
+    果为180,那么可以认为你的视界很广阔,但是在180度的时候，往往物体很小，因为他在你的整个可视区域中的比例变小了。
+    近平面near：这个呢，表示你近处的裁面的距离。补充一下，也可以认为是眼睛距离近处的距离，假设为10米远，请不要设置
+    为负值，Three.js就傻了,不知道怎么算了,
+    远平面far：这个呢，表示你远处的裁面,
+    纵横比aspect：实际窗口的纵横比，即宽度除以高度。这个值越大，说明你宽度越大，那么你可能看的是宽银幕电影了，如果
+    这个值小于1，那么可能你看到的是如下的图中的LED屏幕了。
+
+    3.渲染器：
+    渲染器，决定了画家怎么将眼前的场景画到屏幕上。
+    THREE.WebGLRenderer()
+
+    4.几何体，就是要显示在场景中的对象。 -->
+</body>
+<script>
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 8);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setClearColor("#FFFFFF");
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+    var geometry = new THREE.CubeGeometry(2, 2, 2);  //几何体
+    var material = new THREE.MeshBasicMaterial({ color: 0xff0000 }); //材质
+    var cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    camera.position.z = 5;
+    function render() {
+        requestAnimationFrame(render);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    render();
+</script>
+
+</html>
